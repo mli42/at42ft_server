@@ -32,8 +32,8 @@ server {
         }
 
         location ~ \.php$ {
-			include snippets/fastcgi-php.conf;
-			fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+			#include snippets/fastcgi-php.conf;
+			#fastcgi_pass unix:/run/php/php7.3-fpm.sock;
                 #NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
                 include fastcgi.conf;
                 fastcgi_intercept_errors on;

@@ -11,5 +11,8 @@ flush privileges;"
 
 ln -s /etc/nginx/sites-available/wp_config /etc/nginx/sites-enabled/
 
+# Verify nginx setup:
+# nginx -t
+
 /bin/sh
 # tail -f /dev/null
