@@ -32,5 +32,6 @@ RUN wget -c https://wordpress.org/latest.tar.gz; \
 # RUN chown -R www-data:www-data /var/www/html/wordpress/
 # RUN chmod 755 -R /var/www/html/wordpress/
 
-COPY ./srcs/ ./
+COPY ./srcs/wp_config /etc/nginx/sites-available/
+COPY ./srcs/start.sh ./
 ENTRYPOINT /bin/sh ./start.sh
