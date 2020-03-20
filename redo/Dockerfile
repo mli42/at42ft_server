@@ -27,7 +27,8 @@ RUN service mysql start && \
 
 # Configure nginx
 COPY ./srcs/wordpress /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
+RUN ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/ && \
+	rm -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # RUN rm /etc/nginx/sites-available/default
 # COPY srcs/default /etc/nginx/sites-available/default
