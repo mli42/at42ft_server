@@ -20,6 +20,8 @@ ARG VERSION="4.9.0.1"
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz && \
 	tar -xf phpMyAdmin-${VERSION}-all-languages.tar.gz && \
 	mv phpMyAdmin-${VERSION}-all-languages/ /var/www/html/phpmyadmin
+# Install SSL
+RUN apt-get install -y openssl
 
 # Configure MySQL
 RUN service mysql start && \
@@ -46,6 +48,12 @@ RUN chown -R www-data:www-data /var/www/html/wordpress/ && \
 COPY ./srcs/phpmyadmin_config.php /var/www/html/phpmyadmin/config.inc.php
 RUN chown -R www-data:www-data /var/www/html/phpmyadmin && \
 	chmod -R 755 /var/www/html/phpmyadmin
+
+# SSL
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	-subj "/C=FR/ST=75/L=Paris/O=42/CN=mli" \
+	-keyout /etc/ssl/private/nginx-selfsigned.key \
+	-out /etc/ssl/certs/nginx-selfsigned.crt
 
 EXPOSE 80 443
 
